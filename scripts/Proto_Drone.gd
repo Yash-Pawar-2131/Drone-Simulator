@@ -55,13 +55,17 @@ func _physics_process(delta):
 		Vector3(0, error_integral, 0) * IGAIN
 	)
 	# force = (Vector3(0, error, 0) * PGAIN)
-	# add_force(Vector3(0, clamp(force.y, 0, 100), 0), Vector3(0, 0, 0))
-	add_force(force, Vector3(0, 0, 0))
-	# print(force.y)
+	# add_force(force, Vector3(0, 0, 0))
+	# add_force(Vector3(0, clamp(force.y, 0, 1000), 0), Vector3(0, 0, 0)) # Only upward thrust
+	# print(clamp(force.y, 0, 1000))
 
+	# print(Input.get_axis("down_thrust", "up_thrust"))
+	# add_force(Vector3(0, Input.get_axis("down_thrust", "up_thrust") * 5, 0), Vector3(0, 0, 0))
+	
+	
 	torque = (
 		Vector3(0, error_yaw, 0) * (PGAIN / 4.0) +
 		Vector3(0, error_yaw_derivative, 0) * (DGAIN) +
 		Vector3(0, error_yaw_integral, 0) * IGAIN
 	)
-	add_torque(torque)
+	# add_torque(torque)
