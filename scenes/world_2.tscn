@@ -208,12 +208,10 @@ transform = Transform( -0.804241, 0.150087, -0.575039, -2.20779e-08, 0.967586, 0
 
 [node name="Proto_Drone" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.28132, 0 )
-visible = false
 script = ExtResource( 4 )
 
 [node name="Drone" type="Spatial" parent="Proto_Drone"]
 transform = Transform( -1.31134e-08, 0, -0.3, 0, 0.3, 0, 0.3, 0, -1.31134e-08, 0, 0, 0 )
-visible = false
 
 [node name="wing_0" type="Spatial" parent="Proto_Drone/Drone"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1.2, 3.3703, 0.611815, 3.32662 )
@@ -253,6 +251,7 @@ disabled = true
 
 [node name="Proto_Drone_Mesh" type="MeshInstance" parent="Proto_Drone"]
 transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
+visible = false
 mesh = SubResource( 3 )
 skeleton = NodePath("../..")
 material/0 = SubResource( 4 )
@@ -260,10 +259,10 @@ material/0 = SubResource( 4 )
 [node name="CollisionShape" type="CollisionShape" parent="Proto_Drone"]
 transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 7 )
-disabled = true
 
 [node name="Proto_Drone2" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.281, 0 )
+visible = false
 script = ExtResource( 12 )
 
 [node name="Proto_Drone_Mesh" type="MeshInstance" parent="Proto_Drone2"]
