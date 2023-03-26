@@ -77,7 +77,7 @@ func _physics_process(delta):
 
 	thrust = PGAIN * altitudeError + DGAIN * altitudeErrorDerivative + IGAIN * altitudeErrorIntegral
 	pitch = PGAIN * pitchError + DGAIN * pitchErrorDerivative + IGAIN * pitchErrorIntegral
-	roll = PGAIN * rollError + DGAIN * error_derivative + IGAIN * error_integral
+#	roll = PGAIN * rollError + DGAIN * error_derivative + IGAIN * error_integral
 
 	motorFR = thrust + yaw + pitch + roll
 	motorFL = thrust - yaw + pitch - roll

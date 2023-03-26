@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://floor_texture_light.png" type="Texture" id=1]
+[ext_resource path="res://scenes/PIDControlledBody.gd" type="Script" id=2]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 0.101118, 1 )
+
+[sub_resource type="CubeMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_texture = ExtResource( 1 )
+uv1_scale = Vector3( 2, 1.333, 1 )
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="ConvexPolygonShape" id=5]
+points = PoolVector3Array( -1, -1, -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, -1, -1, 1, -1, 1, -1 )
+
+[sub_resource type="CubeMesh" id=6]
+
+[sub_resource type="SpatialMaterial" id=7]
+flags_transparent = true
+albedo_color = Color( 1, 1, 1, 0.0196078 )
+
+[node name="PIDRotation" type="Spatial"]
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.9241, -1.15082e-08, 0.382151, -0.330953, -0.5, 0.800294, 0.191076, -0.866025, -0.46205, 3.56204, 7.45955, -4.30677 )
+light_energy = 0.3
+shadow_enabled = true
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.933136, 0.359525, 0, -0.359525, 0.933136, 0, 2.359, 4.49 )
+
+[node name="PIDControlledBody" type="RigidBody" parent="."]
+visible = false
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_y = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="PIDControlledBody"]
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="PIDControlledBody"]
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 2 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 3 )
+
+[node name="TestRigidBody" type="RigidBody" parent="."]
+visible = false
+
+[node name="MeshInstance" type="MeshInstance" parent="TestRigidBody"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.614195, 1.4393, -0.494086 )
+mesh = SubResource( 4 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="TestRigidBody"]
+transform = Transform( 0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0.214051, 1.4393, -0.494086 )
+shape = SubResource( 5 )
+disabled = true
+
+[node name="DesiredPosition" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )

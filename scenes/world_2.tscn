@@ -34,17 +34,14 @@ albedo_color = Color( 1, 1, 1, 0.0392157 )
 [sub_resource type="CylinderMesh" id=8]
 
 [sub_resource type="SpatialMaterial" id=10]
-flags_transparent = true
 albedo_color = Color( 0.501961, 1, 0.498039, 0.0392157 )
 
 [sub_resource type="PrismMesh" id=9]
 
 [sub_resource type="SpatialMaterial" id=11]
-flags_transparent = true
 albedo_color = Color( 1, 0.360784, 0.360784, 0.0392157 )
 
 [sub_resource type="SpatialMaterial" id=12]
-flags_transparent = true
 albedo_color = Color( 0.176471, 0.607843, 1, 0.0392157 )
 
 [sub_resource type="ArrayMesh" id=13]
@@ -256,6 +253,7 @@ shape = SubResource( 7 )
 
 [node name="Proto_Drone2" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.281, 0 )
+visible = false
 script = ExtResource( 12 )
 
 [node name="Proto_Drone_Mesh" type="MeshInstance" parent="Proto_Drone2"]
