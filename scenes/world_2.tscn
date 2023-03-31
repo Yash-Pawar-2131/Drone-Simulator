@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://texture_01.png" type="Texture" id=1]
 [ext_resource path="res://texture_01_.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scenes/wing_0.gd" type="Script" id=13]
 [ext_resource path="res://scripts/xform_test.gd" type="Script" id=14]
 [ext_resource path="res://scripts/world_2.gd" type="Script" id=15]
+[ext_resource path="res://scripts/Proto_Drone3.gd" type="Script" id=16]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -153,6 +154,7 @@ shape = SubResource( 5 )
 
 [node name="Desired_Drone_State" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0.923719, 0 )
+visible = false
 script = ExtResource( 3 )
 
 [node name="Desired_Drone_Mesh" type="MeshInstance" parent="Desired_Drone_State"]
@@ -250,10 +252,14 @@ material/0 = SubResource( 4 )
 [node name="CollisionShape" type="CollisionShape" parent="Proto_Drone"]
 transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 7 )
+disabled = true
 
 [node name="Proto_Drone2" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.281, 0 )
-visible = false
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 2.281, 0 )
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
 script = ExtResource( 12 )
 
 [node name="Proto_Drone_Mesh" type="MeshInstance" parent="Proto_Drone2"]
@@ -278,6 +284,34 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1 )
 transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
 shape = SubResource( 7 )
 
+[node name="Proto_Drone3" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35061, 0 )
+visible = false
+script = ExtResource( 16 )
+
+[node name="Proto_Drone_Mesh" type="MeshInstance" parent="Proto_Drone3"]
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
+mesh = SubResource( 3 )
+skeleton = NodePath("../..")
+material/0 = SubResource( 16 )
+
+[node name="P1" type="Position3D" parent="Proto_Drone3/Proto_Drone_Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1 )
+
+[node name="P2" type="Position3D" parent="Proto_Drone3/Proto_Drone_Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1 )
+
+[node name="P3" type="Position3D" parent="Proto_Drone3/Proto_Drone_Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1 )
+
+[node name="P4" type="Position3D" parent="Proto_Drone3/Proto_Drone_Mesh"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Proto_Drone3"]
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 7 )
+disabled = true
+
 [node name="Proto_Drone_Mesh2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, 0, 2.281, 0 )
 visible = false
@@ -288,3 +322,22 @@ script = ExtResource( 14 )
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, -4, 4, 0 )
 shadow_enabled = true
+
+[node name="motor" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -14.0
+margin_right = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="force" type="Label" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -54.0
+margin_right = 40.0
+margin_bottom = -40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
