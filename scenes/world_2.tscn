@@ -65,8 +65,11 @@ material/0 = SubResource( 2 )
 shape = SubResource( 5 )
 
 [node name="Desired_Drone_State" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, -6.16004, 0.842582, 0 )
+transform = Transform( 1, 0, 0, 0, 0.1, 0, 0, 0, 1, -2.33068, 5.10879, 0 )
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Desired_Drone_Mesh" type="MeshInstance" parent="Desired_Drone_State"]
 mesh = SubResource( 3 )
@@ -107,7 +110,7 @@ skeleton = NodePath("../..")
 material/0 = SubResource( 12 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( -0.804241, 0.150087, -0.575039, -2.20779e-08, 0.967586, 0.252542, 0.594303, 0.203105, -0.778172, -6.77563, 5.13827, -10.2797 )
+transform = Transform( -0.871949, -0.123644, 0.473726, -2.20779e-08, 0.967586, 0.252543, -0.489596, 0.220204, -0.843686, 1.481, 8.085, -12.756 )
 
 [node name="Proto_Drone4" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0 )
