@@ -75,7 +75,7 @@ func _physics_process(delta):
 
 	roll = (roll_error * PGAIN_R  + roll_error_derivative * DGAIN_R + roll_error_integral * IGAIN_R )* 0.001
 	thrust = error * PGAIN + error_derivative * DGAIN + error_integral * IGAIN
-	print(roll_error)
+	
 	motorFR = thrust +  roll
 	motorFL = thrust - roll
 	motorBR = thrust + roll
