@@ -9,13 +9,24 @@ const DGAIN = 3
 const IGAIN = 2
 
 const PGAIN_R = 3
-const DGAIN_R = 10
-const IGAIN_R = 3
+const DGAIN_R = 0
+const IGAIN_R = 0
+
+const PGAIN_X = 3
+const DGAIN_X = 3
+const IGAIN_X = 0
+
+var xPID : float
 
 var roll_error : float
 var previous_roll_error : float
 var roll_error_derivative : float
 var roll_error_integral : float
+
+var x_error : float
+var previous_x_error : float
+var x_error_derivative : float
+var x_error_integral : float
 
 var previous_error : float
 var error : float
@@ -36,7 +47,10 @@ var motorBL : float
 
 func _ready():
 	previous_roll_error = 0.0
-	roll_error_integral = 0.0;
+	roll_error_integral = 0.0
+
+	previous_x_error = 0.0
+	x_error_integral = 0.0
 	
 	previous_error = 0.0
 	error_integral = 0.0
@@ -45,22 +59,27 @@ func _ready():
 	yaw = 0.0
 	pitch = 0.0
 	roll = 0.0
-
+	
+	DebugOverlay.draw.add_vector(self, Vector3(0,0,0), 10, 4, Color(0, 1, 0, 0.5))
 	pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	pass
 
 func _physics_process(delta):
 	
+	x_error = (desired_drone_state.translation.x - self.translation.x) 
+	x_error_derivative = (x_error - previous_x_error) / delta
+	previous_x_error = x_error
+	x_error_integral = x_error_integral + x_error * delta
 	
-	roll_error = (desired_drone_state.translation.x - self.translation.x) 
+	xPID = x_error * PGAIN_X  + x_error_derivative * DGAIN_X + x_error_integral * IGAIN_X
+	
+	roll_error = xPID - Vector3.RIGHT.angle_to(self.get_transform().basis.x)
 	roll_error_derivative = (roll_error - previous_roll_error) / delta
 	previous_roll_error = roll_error
 	roll_error_integral = roll_error_integral + roll_error * delta
-		
+	
 	error = (desired_drone_state.translation.y - self.translation.y)
 	error_derivative = (error - previous_error) / delta
 	previous_error = error
@@ -76,7 +95,7 @@ func _physics_process(delta):
 	roll = (roll_error * PGAIN_R  + roll_error_derivative * DGAIN_R + roll_error_integral * IGAIN_R )* 0.001
 	thrust = error * PGAIN + error_derivative * DGAIN + error_integral * IGAIN
 	
-	motorFR = thrust +  roll
+	motorFR = thrust + roll
 	motorFL = thrust - roll
 	motorBR = thrust + roll
 	motorBL = thrust - roll
